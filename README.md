@@ -1,6 +1,6 @@
-# 🛶 Kayak — Data Engineering : Météo, Hôtels & Pipeline AWS
+# 🛶 Kayak — Recommandation de Destinations Françaises
 
-> *Construire un pipeline de données complet pour recommander les meilleures destinations de vacances en France*
+> *Pipeline Data Engineering complet : API Météo → Scraping Booking.com → AWS S3 → AWS RDS*
 
 [![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python)](https://www.python.org/)
 [![AWS S3](https://img.shields.io/badge/AWS-S3-FF9900?logo=amazonaws)](https://aws.amazon.com/s3/)
@@ -11,7 +11,7 @@
 
 ## 🎯 Objectif
 
-Construire un pipeline de données end-to-end pour recommander aux utilisateurs Kayak les meilleures destinations françaises selon la météo et la qualité des hôtels disponibles.
+Construire un pipeline de données end-to-end pour recommander aux utilisateurs Kayak les meilleures destinations françaises selon la météo et la qualité des hôtels.
 
 ---
 
@@ -24,7 +24,7 @@ OpenWeatherMap API     → Prévisions météo 7 jours
         ↓
 Score météo composite  → Classement des destinations
         ↓
-Booking.com scraping   → Hôtels (Top 5 destinations)
+Booking.com scraping   → Hôtels (BeautifulSoup)
         ↓
 AWS S3 (Data Lake)     → Stockage raw + processed
         ↓
@@ -37,11 +37,15 @@ Plotly Maps            → 2 cartes interactives
 
 ## 📊 Résultats
 
-- **35 villes** françaises géocodées et analysées
-- **7 jours** de prévisions météo par ville
-- **Top 5 destinations** selon score météo composite
-- **Top 20 hôtels** scrapés sur Booking.com
-- Data Lake S3 + Data Warehouse RDS alimentés
+### 🏆 Top 5 Destinations (Score Météo)
+
+| Rang | Ville | Score | Temp. moy | Pluie |
+|---|---|---|---|---|
+| 1 | **Collioure** | 85.9 | 17.6°C | 0% |
+| 2 | **Nîmes** | 84.4 | 16.6°C | 0% |
+| 3 | **Bayonne** | 83.0 | 16.5°C | 0% |
+| 4 | **Avignon** | 82.2 | 15.8°C | 0% |
+| 5 | **Uzès** | 81.6 | 15.8°C | 0% |
 
 ---
 
@@ -49,13 +53,20 @@ Plotly Maps            → 2 cartes interactives
 
 ```
 kayak/
-├── data/                             # Données générées (non versionnées)
-│   ├── weather_data.csv
-│   ├── hotels_data.csv
-│   └── city_scores.csv
+├── data/
+│   ├── weather_france_cities.csv     # Scores météo des 35 villes
+│   ├── weather_daily_details.csv     # Météo journalière (35 × 7 jours)
+│   ├── hotels.csv                    # Hôtels scrapés Booking.com
+│   ├── final_kayak_data.csv          # Dataset consolidé final
+│   └── kayak_destinations.csv        # Top destinations avec coordonnées
 ├── notebooks/
-│   └── kayak_project.ipynb           # Pipeline complet
-├── .env.example                      # Template variables d'environnement
+│   ├── kayak_final.ipynb             # Notebook consolidé (analyse complète)
+│   └── kayak_projet_complet.ipynb    # Notebook de développement
+├── src/
+│   ├── kayak_part1_weather.py        # Collecte météo (Nominatim + OpenWeatherMap)
+│   ├── kayak_part2_scraping.py       # Scraping hôtels (BeautifulSoup)
+│   └── kayak_part3_etl.py            # ETL S3 → RDS PostgreSQL
+├── .env.example
 ├── .gitignore
 ├── README.md
 └── requirements.txt
@@ -63,7 +74,7 @@ kayak/
 
 ---
 
-## 🧠 Score Météo
+## 🧠 Score Météo Composite
 
 | Critère | Poids | Logique |
 |---|---|---|
@@ -79,26 +90,23 @@ kayak/
 ```bash
 git clone https://github.com/MartialBayom/kayak-data-engineering.git
 cd kayak-data-engineering
-
 pip install -r requirements.txt
-
 cp .env.example .env
 # Remplir .env avec vos clés API et credentials AWS
-
-jupyter notebook notebooks/kayak_project.ipynb
+jupyter notebook notebooks/kayak_final.ipynb
 ```
 
 ---
 
-## 🔑 APIs utilisées
+## 🔑 APIs & Services utilisés
 
-| Service | Usage | Docs |
-|---|---|---|
-| Nominatim | Géocodage GPS | [nominatim.org](https://nominatim.org/) |
-| OpenWeatherMap | Prévisions 7 jours | [openweathermap.org](https://openweathermap.org/) |
-| Booking.com | Scraping hôtels | Web scraping (BeautifulSoup) |
-| AWS S3 | Data Lake | [aws.amazon.com/s3](https://aws.amazon.com/s3/) |
-| AWS RDS | Data Warehouse | [aws.amazon.com/rds](https://aws.amazon.com/rds/) |
+| Service | Usage |
+|---|---|
+| Nominatim | Géocodage GPS des 35 villes |
+| OpenWeatherMap | Prévisions météo 7 jours |
+| Booking.com | Scraping hôtels (BeautifulSoup) |
+| AWS S3 | Data Lake (CSV raw + processed) |
+| AWS RDS | Data Warehouse PostgreSQL |
 
 ---
 
