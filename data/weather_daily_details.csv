@@ -1,0 +1,176 @@
+city,date,temp,humidity,wind_speed,precip_prob,rain_mm,description,weather_score
+Mont Saint Michel,2026-02-21,12.67,86,5.85,0.0,0.0,couvert,69.82
+Mont Saint Michel,2026-02-22,11.51,91,6.02,95.0,1.04,légère pluie,40.32
+Mont Saint Michel,2026-02-23,14.16,88,7.21,0.0,0.0,couvert,71.98
+Mont Saint Michel,2026-02-24,13.61,65,5.48,0.0,0.0,nuageux,76.19
+Mont Saint Michel,2026-02-25,15.28,68,4.67,0.0,0.0,ciel dégagé,78.44
+St Malo,2026-02-21,12.53,86,7.36,0.0,0.0,couvert,69.58
+St Malo,2026-02-22,12.27,87,8.56,90.0,0.84,légère pluie,44.3
+St Malo,2026-02-23,13.95,85,8.82,0.0,0.0,couvert,72.29
+St Malo,2026-02-24,13.45,67,6.23,0.0,0.0,nuageux,75.46
+St Malo,2026-02-25,14.27,70,4.38,0.0,0.0,ciel dégagé,76.22
+Bayeux,2026-02-21,12.26,85,6.63,0.0,0.0,couvert,69.33
+Bayeux,2026-02-22,11.04,93,6.91,100.0,1.05,légère pluie,37.77
+Bayeux,2026-02-23,13.62,89,8.94,5.0,0.0,couvert,69.56
+Bayeux,2026-02-24,14.4,62,5.31,0.0,0.0,partiellement nuageux,78.25
+Bayeux,2026-02-25,16.19,63,3.91,0.0,0.0,ciel dégagé,81.16
+Le Havre,2026-02-21,10.59,88,6.59,0.0,0.0,couvert,65.73
+Le Havre,2026-02-22,10.28,93,7.42,100.0,1.0,légère pluie,36.56
+Le Havre,2026-02-23,11.62,92,8.43,79.0,0.0,couvert,46.88
+Le Havre,2026-02-24,11.27,72,4.62,0.0,0.0,nuageux,70.52
+Le Havre,2026-02-25,13.35,72,3.86,0.0,0.0,ciel dégagé,74.16
+Rouen,2026-02-21,12.25,81,6.91,0.0,0.0,couvert,70.21
+Rouen,2026-02-22,11.96,89,7.02,100.0,1.02,légère pluie,40.36
+Rouen,2026-02-23,13.88,89,7.27,100.0,0.2,légère pluie,45.77
+Rouen,2026-02-24,14.47,57,3.66,0.0,0.0,peu nuageux,79.5
+Rouen,2026-02-25,16.4,68,4.2,0.0,0.0,ciel dégagé,80.4
+Paris,2026-02-21,13.62,70,4.49,0.0,0.0,couvert,75.08
+Paris,2026-02-22,12.83,74,5.12,0.0,0.0,couvert,72.8
+Paris,2026-02-23,13.27,83,5.31,100.0,0.15,légère pluie,46.17
+Paris,2026-02-24,15.23,46,2.83,0.0,0.0,partiellement nuageux,83.3
+Paris,2026-02-25,16.61,55,2.53,0.0,0.0,ciel dégagé,83.69
+Amiens,2026-02-21,11.48,80,6.8,0.0,0.0,couvert,69.09
+Amiens,2026-02-22,11.29,90,7.06,100.0,0.8,légère pluie,39.51
+Amiens,2026-02-23,13.04,90,7.69,100.0,0.72,légère pluie,42.77
+Amiens,2026-02-24,14.21,56,4.54,0.0,0.0,peu nuageux,79.27
+Amiens,2026-02-25,16.37,68,4.15,0.0,0.0,ciel dégagé,80.35
+Lille,2026-02-21,11.25,80,7.45,0.0,0.0,couvert,68.69
+Lille,2026-02-22,10.71,91,7.34,80.0,0.33,légère pluie,44.44
+Lille,2026-02-23,11.26,93,6.26,100.0,0.5,légère pluie,39.53
+Lille,2026-02-24,14.04,54,4.89,0.0,0.0,peu nuageux,79.42
+Lille,2026-02-25,16.09,65,3.98,0.0,0.0,ciel dégagé,80.53
+Strasbourg,2026-02-21,8.45,86,3.64,100.0,0.59,légère pluie,35.96
+Strasbourg,2026-02-22,9.67,87,4.72,100.0,0.75,légère pluie,37.47
+Strasbourg,2026-02-23,10.4,87,4.56,26.0,0.3,légère pluie,58.38
+Strasbourg,2026-02-24,15.54,70,2.45,0.0,0.0,nuageux,78.44
+Strasbourg,2026-02-25,14.93,70,0.37,0.0,0.0,ciel dégagé,77.38
+Chateau du Haut Koenigsbourg,2026-02-21,6.1,90,3.48,85.0,0.66,légère pluie,34.53
+Chateau du Haut Koenigsbourg,2026-02-22,7.44,91,1.94,100.0,0.71,légère pluie,32.77
+Chateau du Haut Koenigsbourg,2026-02-23,7.58,92,2.43,100.0,0.58,légère pluie,33.11
+Chateau du Haut Koenigsbourg,2026-02-24,14.27,69,0.74,0.0,0.0,nuageux,76.45
+Chateau du Haut Koenigsbourg,2026-02-25,13.87,70,1.46,0.0,0.0,ciel dégagé,75.52
+Colmar,2026-02-21,8.71,89,2.71,25.0,0.21,légère pluie,55.44
+Colmar,2026-02-22,10.03,90,2.4,81.0,0.38,légère pluie,43.1
+Colmar,2026-02-23,9.98,91,2.7,100.0,0.51,légère pluie,37.72
+Colmar,2026-02-24,16.28,72,1.36,0.0,0.0,partiellement nuageux,79.29
+Colmar,2026-02-25,16.22,66,1.6,0.0,0.0,ciel dégagé,80.53
+Eguisheim,2026-02-21,8.42,89,2.78,12.0,0.0,couvert,58.71
+Eguisheim,2026-02-22,9.74,89,2.37,76.0,0.36,légère pluie,44.12
+Eguisheim,2026-02-23,9.5,92,2.61,100.0,0.56,légère pluie,36.52
+Eguisheim,2026-02-24,15.93,72,1.46,0.0,0.0,partiellement nuageux,78.68
+Eguisheim,2026-02-25,15.98,65,1.63,0.0,0.0,ciel dégagé,80.34
+Besancon,2026-02-21,9.8,86,4.96,0.0,0.0,couvert,64.8
+Besancon,2026-02-22,11.3,79,3.64,0.0,0.0,couvert,69.0
+Besancon,2026-02-23,11.78,79,3.91,0.0,0.0,couvert,69.84
+Besancon,2026-02-24,15.44,71,1.52,0.0,0.0,couvert,78.05
+Besancon,2026-02-25,16.56,63,0.84,0.0,0.0,ciel dégagé,81.8
+Dijon,2026-02-21,11.62,75,5.4,0.0,0.0,couvert,70.46
+Dijon,2026-02-22,13.75,73,4.23,0.0,0.0,couvert,74.64
+Dijon,2026-02-23,12.8,75,3.91,0.0,0.0,couvert,72.53
+Dijon,2026-02-24,15.29,70,1.5,0.0,0.0,nuageux,78.01
+Dijon,2026-02-25,14.95,63,5.74,0.0,0.0,ciel dégagé,78.99
+Annecy,2026-02-21,9.49,82,1.22,0.0,0.0,couvert,65.16
+Annecy,2026-02-22,10.77,74,0.41,0.0,0.0,couvert,69.2
+Annecy,2026-02-23,11.76,74,0.26,0.0,0.0,couvert,70.93
+Annecy,2026-02-24,13.54,71,0.91,0.0,0.0,couvert,74.72
+Annecy,2026-02-25,15.84,56,0.96,0.0,0.0,ciel dégagé,82.12
+Grenoble,2026-02-21,10.77,86,3.54,0.0,0.0,nuageux,66.5
+Grenoble,2026-02-22,12.03,75,1.23,0.0,0.0,couvert,71.18
+Grenoble,2026-02-23,13.18,72,1.78,0.0,0.0,couvert,73.86
+Grenoble,2026-02-24,15.62,67,0.18,0.0,0.0,couvert,79.26
+Grenoble,2026-02-25,17.55,60,1.88,0.0,0.0,ciel dégagé,84.21
+Lyon,2026-02-21,10.15,67,1.25,0.0,0.0,couvert,69.69
+Lyon,2026-02-22,12.93,60,0.59,0.0,0.0,couvert,76.13
+Lyon,2026-02-23,13.35,63,0.98,0.0,0.0,couvert,76.19
+Lyon,2026-02-24,14.03,62,1.33,0.0,0.0,couvert,77.6
+Lyon,2026-02-25,16.52,52,4.66,0.0,0.0,peu nuageux,84.21
+Gorges du Verdon,2026-02-21,10.92,41,2.46,0.0,0.0,partiellement nuageux,76.88
+Gorges du Verdon,2026-02-22,13.29,33,1.89,0.0,0.0,partiellement nuageux,79.68
+Gorges du Verdon,2026-02-23,11.13,46,1.67,0.0,0.0,couvert,76.13
+Gorges du Verdon,2026-02-24,12.57,52,1.82,0.0,0.0,nuageux,77.3
+Gorges du Verdon,2026-02-25,12.77,53,2.0,0.0,0.0,peu nuageux,77.42
+Bormes les Mimosas,2026-02-21,13.47,45,4.42,0.0,0.0,nuageux,80.45
+Bormes les Mimosas,2026-02-22,14.19,58,2.54,0.0,0.0,nuageux,78.78
+Bormes les Mimosas,2026-02-23,13.02,55,0.71,0.0,0.0,couvert,77.41
+Bormes les Mimosas,2026-02-24,13.63,71,1.59,0.0,0.0,partiellement nuageux,74.88
+Bormes les Mimosas,2026-02-25,14.66,66,3.76,0.0,0.0,peu nuageux,77.81
+Cassis,2026-02-21,13.98,54,7.61,0.0,0.0,partiellement nuageux,79.31
+Cassis,2026-02-22,13.76,46,3.8,0.0,0.0,partiellement nuageux,80.73
+Cassis,2026-02-23,12.53,62,2.04,0.0,0.0,couvert,74.98
+Cassis,2026-02-24,13.47,72,2.26,0.0,0.0,nuageux,74.37
+Cassis,2026-02-25,14.7,66,5.0,0.0,0.0,peu nuageux,77.88
+Marseille,2026-02-21,14.67,56,9.48,0.0,0.0,partiellement nuageux,80.07
+Marseille,2026-02-22,14.08,50,4.43,0.0,0.0,partiellement nuageux,80.39
+Marseille,2026-02-23,13.62,59,2.77,0.0,0.0,couvert,77.56
+Marseille,2026-02-24,14.04,73,2.47,0.0,0.0,nuageux,75.14
+Marseille,2026-02-25,14.96,69,4.85,0.0,0.0,peu nuageux,77.66
+Aix en Provence,2026-02-21,13.94,52,6.2,0.0,0.0,partiellement nuageux,79.69
+Aix en Provence,2026-02-22,14.12,41,2.02,0.0,0.0,partiellement nuageux,82.48
+Aix en Provence,2026-02-23,13.53,49,1.57,0.0,0.0,couvert,79.65
+Aix en Provence,2026-02-24,15.09,59,1.72,0.0,0.0,couvert,80.13
+Aix en Provence,2026-02-25,16.63,47,1.05,0.0,0.0,peu nuageux,85.53
+Avignon,2026-02-21,15.7,54,11.53,0.0,0.0,ciel dégagé,82.32
+Avignon,2026-02-22,15.44,54,7.67,0.0,0.0,nuageux,81.87
+Avignon,2026-02-23,15.45,59,6.94,0.0,0.0,couvert,80.76
+Avignon,2026-02-24,15.67,58,1.74,0.0,0.0,couvert,81.37
+Avignon,2026-02-25,16.91,54,1.94,0.0,0.0,partiellement nuageux,84.44
+Uzes,2026-02-21,15.99,53,8.37,0.0,0.0,partiellement nuageux,83.06
+Uzes,2026-02-22,15.74,55,4.27,0.0,0.0,nuageux,82.17
+Uzes,2026-02-23,16.01,57,2.66,0.0,0.0,couvert,82.19
+Uzes,2026-02-24,15.86,63,1.15,0.0,0.0,couvert,80.58
+Uzes,2026-02-25,15.42,63,2.92,0.0,0.0,partiellement nuageux,79.81
+Nimes,2026-02-21,16.78,47,7.85,0.0,0.0,peu nuageux,85.79
+Nimes,2026-02-22,16.3,49,3.16,0.0,0.0,nuageux,84.5
+Nimes,2026-02-23,16.7,48,2.11,0.0,0.0,couvert,85.42
+Nimes,2026-02-24,16.61,58,0.79,0.0,0.0,couvert,83.02
+Nimes,2026-02-25,16.51,57,2.85,0.0,0.0,partiellement nuageux,83.07
+Aigues Mortes,2026-02-21,15.76,55,4.82,0.0,0.0,peu nuageux,82.2
+Aigues Mortes,2026-02-22,13.84,60,1.87,0.0,0.0,nuageux,77.72
+Aigues Mortes,2026-02-23,14.52,60,1.36,0.0,0.0,couvert,78.91
+Aigues Mortes,2026-02-24,14.38,70,1.85,0.0,0.0,couvert,76.41
+Aigues Mortes,2026-02-25,14.08,79,5.62,0.0,0.0,partiellement nuageux,73.86
+Saintes Maries de la mer,2026-02-21,15.13,58,7.84,0.0,0.0,peu nuageux,80.43
+Saintes Maries de la mer,2026-02-22,14.05,62,3.4,0.0,0.0,nuageux,77.64
+Saintes Maries de la mer,2026-02-23,14.33,62,2.0,0.0,0.0,couvert,78.13
+Saintes Maries de la mer,2026-02-24,14.52,70,1.45,0.0,0.0,couvert,76.66
+Saintes Maries de la mer,2026-02-25,13.93,80,6.21,0.0,0.0,partiellement nuageux,73.38
+Collioure,2026-02-21,16.59,48,4.38,0.0,0.0,ciel dégagé,85.23
+Collioure,2026-02-22,18.13,45,1.47,0.0,0.0,partiellement nuageux,88.6
+Collioure,2026-02-23,19.28,48,1.39,0.0,0.0,nuageux,89.94
+Collioure,2026-02-24,17.41,56,2.22,0.0,0.0,partiellement nuageux,84.87
+Collioure,2026-02-25,16.37,65,2.13,0.0,0.0,nuageux,81.02
+Carcassonne,2026-02-21,13.5,67,5.05,0.0,0.0,ciel dégagé,75.55
+Carcassonne,2026-02-22,15.26,62,4.61,0.0,0.0,nuageux,79.75
+Carcassonne,2026-02-23,15.53,61,3.82,0.0,0.0,couvert,80.45
+Carcassonne,2026-02-24,16.51,58,5.03,0.0,0.0,partiellement nuageux,82.84
+Carcassonne,2026-02-25,13.89,76,7.5,0.0,0.0,couvert,74.21
+Ariege,2026-02-21,9.16,64,1.09,0.0,0.0,ciel dégagé,68.63
+Ariege,2026-02-22,10.74,61,1.14,0.0,0.0,nuageux,72.07
+Ariege,2026-02-23,10.62,58,0.78,0.0,0.0,couvert,72.53
+Ariege,2026-02-24,14.27,47,0.28,0.0,0.0,partiellement nuageux,81.4
+Ariege,2026-02-25,14.15,50,0.41,0.0,0.0,couvert,80.51
+Toulouse,2026-02-21,13.3,61,1.5,0.0,0.0,ciel dégagé,76.55
+Toulouse,2026-02-22,14.17,61,1.15,0.0,0.0,nuageux,78.07
+Toulouse,2026-02-23,14.36,65,1.58,0.0,0.0,couvert,77.5
+Toulouse,2026-02-24,16.59,47,3.49,0.0,0.0,couvert,85.46
+Toulouse,2026-02-25,15.45,67,8.14,0.0,0.0,partiellement nuageux,78.96
+Montauban,2026-02-21,13.15,69,2.02,0.0,0.0,peu nuageux,74.49
+Montauban,2026-02-22,13.85,67,0.98,0.0,0.0,couvert,76.16
+Montauban,2026-02-23,13.98,71,0.81,0.0,0.0,couvert,75.49
+Montauban,2026-02-24,16.65,58,3.19,0.0,0.0,nuageux,83.09
+Montauban,2026-02-25,16.84,62,5.78,0.0,0.0,partiellement nuageux,82.52
+Biarritz,2026-02-21,13.42,64,2.59,0.0,0.0,ciel dégagé,76.08
+Biarritz,2026-02-22,13.51,68,2.53,0.0,0.0,couvert,75.34
+Biarritz,2026-02-23,15.09,59,1.69,0.0,0.0,couvert,80.13
+Biarritz,2026-02-24,18.07,53,2.33,0.0,0.0,couvert,86.7
+Biarritz,2026-02-25,19.15,55,1.78,0.0,0.0,ciel dégagé,88.14
+Bayonne,2026-02-21,13.74,63,2.59,0.0,0.0,ciel dégagé,76.87
+Bayonne,2026-02-22,13.82,67,2.62,0.0,0.0,couvert,76.11
+Bayonne,2026-02-23,15.54,58,1.69,0.0,0.0,couvert,81.14
+Bayonne,2026-02-24,19.06,50,2.61,0.0,0.0,couvert,89.1
+Bayonne,2026-02-25,20.52,50,2.21,0.0,0.0,ciel dégagé,91.66
+La Rochelle,2026-02-21,11.33,91,5.73,0.0,0.0,couvert,66.35
+La Rochelle,2026-02-22,11.4,85,4.74,0.0,0.0,couvert,67.83
+La Rochelle,2026-02-23,11.91,79,4.17,0.0,0.0,nuageux,70.07
+La Rochelle,2026-02-24,13.17,70,4.03,0.0,0.0,nuageux,74.3
+La Rochelle,2026-02-25,14.18,73,5.26,0.0,0.0,ciel dégagé,75.39
