@@ -60,8 +60,7 @@ kayak/
 │   ├── final_kayak_data.csv          # Dataset consolidé final
 │   └── kayak_destinations.csv        # Top destinations avec coordonnées
 ├── notebooks/
-│   ├── kayak_final.ipynb             # Notebook consolidé (analyse complète)
-│   └── kayak_projet_complet.ipynb    # Notebook de développement
+│   └── kayak_final.ipynb             # Notebook consolidé : météo, hôtels, géocodage, ETL, cartes
 ├── src/
 │   ├── kayak_part1_weather.py        # Collecte météo (Nominatim + OpenWeatherMap)
 │   ├── kayak_part2_scraping.py       # Scraping hôtels (BeautifulSoup)
