@@ -1,4 +1,4 @@
-# 🛶 Kayak — Recommandation de Destinations Françaises
+# Kayak - Recommandation de Destinations Françaises
 
 > *Pipeline Data Engineering complet : API Météo → Scraping Booking.com → AWS S3 → AWS RDS*
 
@@ -9,13 +9,13 @@
 
 ---
 
-## 🎯 Objectif
+## Objectif
 
 Construire un pipeline de données end-to-end pour recommander aux utilisateurs Kayak les meilleures destinations françaises selon la météo et la qualité des hôtels.
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 Nominatim API          → Coordonnées GPS (35 villes)
@@ -35,9 +35,9 @@ Plotly Maps            → 2 cartes interactives
 
 ---
 
-## 📊 Résultats
+## Résultats
 
-### 🏆 Top 5 Destinations (Score Météo)
+### Top 5 Destinations (Score Météo)
 
 | Rang | Ville | Score | Temp. moy | Pluie |
 |---|---|---|---|---|
@@ -49,7 +49,7 @@ Plotly Maps            → 2 cartes interactives
 
 ---
 
-## 🗂️ Structure du projet
+## Structure du projet
 
 ```
 kayak/
@@ -73,7 +73,7 @@ kayak/
 
 ---
 
-## 🧠 Score Météo Composite
+## Score Météo Composite
 
 | Critère | Poids | Logique |
 |---|---|---|
@@ -84,7 +84,7 @@ kayak/
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ```bash
 git clone https://github.com/MartialBayom/kayak-data-engineering.git
@@ -97,7 +97,7 @@ jupyter notebook notebooks/kayak_final.ipynb
 
 ---
 
-## 🔑 APIs & Services utilisés
+## APIs & Services utilisés
 
 | Service | Usage |
 |---|---|
@@ -109,10 +109,10 @@ jupyter notebook notebooks/kayak_final.ipynb
 
 ---
 
-## 👤 Auteur
+##  Auteur
 
 | | Nom | Rôle |
 |---|---|---|
-| 🧑‍💻 | **Martial BAYOM** | Data Engineering |
+| | **Martial BAYOM** | Data Engineering |
 
 Projet réalisé dans le cadre de la **certification Jedha AI School** (RNCP Niveau 6)
