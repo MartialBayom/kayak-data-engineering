@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ⚠️ Récupère ta clé sur https://console.cloud.google.com/
+#  Récupère la clé sur https://console.cloud.google.com/
 #    (active "Places API (New)" dans "APIs & Services")
 GOOGLE_PLACES_API_KEY = os.getenv("GOOGLE_PLACES_API_KEY", "TA_CLE_ICI")
 
@@ -85,36 +85,36 @@ def search_hotels(city_name, max_results=20):
 
 
 # ── Collecte pour les 35 villes ──────────────────────────────
-print("🏨 Récupération des hôtels via Google Places API...\n")
+print("Récupération des hôtels via Google Places API...\n")
 all_hotels = []
 
 for city in CITIES:
-    print(f"🔍 {city}...")
+    print(f" {city}...")
     try:
         hotels = search_hotels(city, max_results=NB_HOTELS_PAR_VILLE)
         all_hotels.extend(hotels)
-        print(f"   ✅ {len(hotels)} hôtels récupérés")
+        print(f"    {len(hotels)} hôtels récupérés")
     except requests.exceptions.RequestException as e:
-        print(f"   ❌ Erreur pour {city}: {e}")
+        print(f"    Erreur pour {city}: {e}")
 
     time.sleep(0.3)  # Petite pause pour rester raisonnable sur le rate limit
 
 df_hotels = pd.DataFrame(all_hotels)
 df_hotels = df_hotels.dropna(subset=["rating"])  # on garde seulement les hôtels notés
 
-print(f"\n✅ {len(df_hotels)} hôtels au total sur {df_hotels['city_name'].nunique()} villes")
+print(f"\n {len(df_hotels)} hôtels au total sur {df_hotels['city_name'].nunique()} villes")
 print(df_hotels.head())
 
 # ── Sauvegarde ────────────────────────────────────────────────
 df_hotels.to_csv("../data/hotels.csv", index=False)
-print("\n✅ Fichier sauvegardé : data/hotels.csv")
+print("\n Fichier sauvegardé : data/hotels.csv")
 
 # ── Top 20 hôtels (note × nombre d'avis, pour éviter qu'un hôtel
 #    avec 1 seul avis à 5 étoiles écrase le classement) ────────
 df_hotels["score"] = df_hotels["rating"] * (df_hotels["rating_count"].clip(upper=500) ** 0.3)
 top20 = df_hotels.sort_values("score", ascending=False).head(20)
-print("\n🏆 TOP 20 HÔTELS :")
+print("\n TOP 20 HÔTELS :")
 print(top20[["city_name", "hotel_name", "rating", "rating_count"]].to_string(index=False))
 
 top20.to_csv("../data/top20_hotels.csv", index=False)
-print("\n✅ Fichier sauvegardé : data/top20_hotels.csv (pour la carte Plotly)")
+print("\n Fichier sauvegardé : data/top20_hotels.csv (pour la carte Plotly)")
