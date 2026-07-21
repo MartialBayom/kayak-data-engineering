@@ -24,7 +24,7 @@ OpenWeatherMap API     → Prévisions météo 7 jours
         ↓
 Score météo composite  → Classement des destinations
         ↓
-Booking.com scraping   → Hôtels (BeautifulSoup)
+Google Places API      → Hôtels (699, notes réelles)
         ↓
 AWS S3 (Data Lake)     → Stockage raw + processed
         ↓
