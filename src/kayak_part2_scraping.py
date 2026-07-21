@@ -13,7 +13,7 @@ import time
 import random
 import re
 
-# ⚠️ NOTE JURY :
+# NOTE JURY :
 # Le scraping de Booking.com peut être bloqué par des mesures anti-bot.
 # Pour un projet réel, on utiliserait Selenium (navigateur headless) ou
 # une API officielle. Ici on présente l'approche BeautifulSoup.
@@ -167,7 +167,7 @@ def scrape_city_hotels(city_name, max_pages=3):
         url = f"{base_url}&offset={offset}"
         
         try:
-            print(f"\n   📄 Scraping page {page + 1} pour {city_name}...")
+            print(f"\n    Scraping page {page + 1} pour {city_name}...")
             
             # Requête HTTP avec les headers réalistes
             response = requests.get(url, headers=HEADERS, timeout=15)
@@ -189,11 +189,11 @@ def scrape_city_hotels(city_name, max_pages=3):
             # Pause aléatoire entre 2 et 5 secondes entre chaque page
             # Aléatoire pour imiter un comportement humain et éviter les blocages
             sleep_time = random.uniform(2, 5)
-            print(f"   ⏳ Pause de {sleep_time:.1f}s avant la prochaine page...")
+            print(f"    Pause de {sleep_time:.1f}s avant la prochaine page...")
             time.sleep(sleep_time)
             
         except requests.exceptions.RequestException as e:
-            print(f"   ❌ Erreur lors du scraping de {city_name} (page {page+1}): {e}")
+            print(f"    Erreur lors du scraping de {city_name} (page {page+1}): {e}")
             break
     
     return all_hotels
@@ -224,12 +224,12 @@ print(f"🏨 Début du scraping pour {len(cities_to_scrape)} villes...")
 
 all_hotels_data = []
 
-for city in cities_to_scrape[:5]:  # ⚠️ Limité à 5 villes pour la démo
+for city in cities_to_scrape[:5]:  #  Limité à 5 villes pour la démo
     print(f"\n🔍 Scraping de {city}...")
     hotels = scrape_city_hotels(city, max_pages=2)
     all_hotels_data.extend(hotels)
     
-    print(f"   ✅ {len(hotels)} hôtels récupérés pour {city}")
+    print(f"    {len(hotels)} hôtels récupérés pour {city}")
     
     # Pause plus longue entre les villes pour éviter les blocages
     sleep_time = random.uniform(5, 10)
@@ -249,12 +249,12 @@ df_hotels = df_hotels[df_hotels["hotel_name"] != "N/A"]
 # Ajout d'un ID unique pour chaque hôtel
 df_hotels["hotel_id"] = range(1, len(df_hotels) + 1)
 
-print(f"\n✅ {len(df_hotels)} hôtels uniques récupérés au total")
+print(f"\n {len(df_hotels)} hôtels uniques récupérés au total")
 print(df_hotels.head(10))
 
 # Sauvegarde
 df_hotels.to_csv("hotels_france.csv", index=False, encoding="utf-8")
-print("\n✅ hotels_france.csv sauvegardé")
+print("\n hotels_france.csv sauvegardé")
 
 
 # ============================================================
@@ -280,7 +280,7 @@ df_hotels_map = pd.merge(
 # Top 20 hôtels par score
 top20_hotels = df_hotels_map.nlargest(20, "score")
 
-print(f"\n🏆 TOP 20 HÔTELS :")
+print(f"\n TOP 20 HÔTELS :")
 print(top20_hotels[["hotel_name", "city_name", "score"]].to_string(index=False))
 
 # Carte Top 20 Hôtels
@@ -301,7 +301,7 @@ fig_hotels = px.scatter_mapbox(
     zoom=4.5,
     center={"lat": 46.5, "lon": 2.5},
     mapbox_style="carto-positron",
-    title="🏨 Top 20 Meilleurs Hôtels en France"
+    title=" Top 20 Meilleurs Hôtels en France"
 )
 
 fig_hotels.update_layout(height=600)
