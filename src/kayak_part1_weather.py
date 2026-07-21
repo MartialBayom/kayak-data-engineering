@@ -27,9 +27,11 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
 
-# ⚠️ IMPORTANT : Remplacer par ta vraie clé API OpenWeatherMap
 # Inscription gratuite sur : https://openweathermap.org/appid
-OPENWEATHER_API_KEY = "VOTRE_CLE_API_ICI"
+import os
+from dotenv import load_dotenv
+load_dotenv()
+OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 # Liste des 35 villes françaises à analyser (fournie par le projet)
 CITIES = [
@@ -42,7 +44,7 @@ CITIES = [
     "Toulouse", "Montauban", "Biarritz", "Bayonne", "La Rochelle"
 ]
 
-print(f"✅ Configuration prête — {len(CITIES)} villes à analyser")
+print(f" Configuration prête — {len(CITIES)} villes à analyser")
 
 
 # ╔══════════════════════════════════════════════════════════╗
@@ -92,7 +94,7 @@ def get_coordinates(city_name):
     # Headers HTTP : Nominatim exige un User-Agent identifiable
     # Sans ça, les requêtes peuvent être bloquées
     headers = {
-        "User-Agent": "KayakProject/1.0 (contact@example.com)"
+        "User-Agent": "KayakProject/1.0 (martialbayom@gmail.com)"
     }
     
     try:
@@ -113,16 +115,16 @@ def get_coordinates(city_name):
                 "lon": float(data[0]["lon"])
             }
         else:
-            print(f"   ⚠️ Aucun résultat pour : {city_name}")
+            print(f"    Aucun résultat pour : {city_name}")
             return None
             
     except requests.exceptions.RequestException as e:
-        print(f"   ❌ Erreur pour {city_name}: {e}")
+        print(f"    Erreur pour {city_name}: {e}")
         return None
 
 
 # Récupération des coordonnées pour toutes les villes
-print("\n📍 Récupération des coordonnées GPS...")
+print("\n Récupération des coordonnées GPS...")
 cities_data = []
 
 for i, city in enumerate(CITIES):
@@ -135,7 +137,7 @@ for i, city in enumerate(CITIES):
             "latitude": coords["lat"],
             "longitude": coords["lon"]
         })
-        print(f"   ✅ {city}: lat={coords['lat']:.4f}, lon={coords['lon']:.4f}")
+        print(f"   {city}: lat={coords['lat']:.4f}, lon={coords['lon']:.4f}")
     
     # IMPORTANT : Pause de 1 seconde entre chaque requête !
     # Nominatim impose une limite d'1 requête/seconde (rate limit).
@@ -144,7 +146,7 @@ for i, city in enumerate(CITIES):
 
 # Création du DataFrame avec les coordonnées
 df_cities = pd.DataFrame(cities_data)
-print(f"\n✅ {len(df_cities)} villes géocodées sur {len(CITIES)}")
+print(f"\n {len(df_cities)} villes géocodées sur {len(CITIES)}")
 print(df_cities.head())
 
 
@@ -165,87 +167,73 @@ print(df_cities.head())
 
 def get_weather(lat, lon, city_name):
     """
-    Récupère les prévisions météo sur 7 jours pour une ville.
-    
-    Args:
-        lat (float): Latitude
-        lon (float): Longitude
-        city_name (str): Nom de la ville (pour les logs)
-        
+    Récupère les prévisions météo sur 5 jours pour une ville,
+    via l'endpoint gratuit /forecast (par tranches de 3h),
+    regroupées par jour.
+
     Returns:
         list: Liste de dicts avec les données météo par jour
-    
-    Explication jury :
-    - L'API One Call retourne les prévisions journalières dans "daily"
-    - Pour chaque jour on calcule un score météo basé sur :
-      * Température moyenne
-      * Probabilité de pluie (pop = probability of precipitation)
-      * Volume de pluie (rain)
-      * Humidité
     """
-    
-    url = "https://api.openweathermap.org/data/2.5/onecall"
-    
+
+    url = "https://api.openweathermap.org/data/2.5/forecast"
+
     params = {
         "lat": lat,
         "lon": lon,
-        "exclude": "current,minutely,hourly,alerts",  # On ne veut que les données daily
-        "units": "metric",   # Températures en Celsius
+        "units": "metric",
         "appid": OPENWEATHER_API_KEY
     }
-    
+
     try:
         response = requests.get(url, params=params)
         response.raise_for_status()
         data = response.json()
-        
+
+        # On regroupe les entrées 3h par jour calendaire
+        from collections import defaultdict
+        by_day = defaultdict(list)
+        for entry in data.get("list", []):
+            day = entry["dt_txt"].split(" ")[0]  # "2026-07-21"
+            by_day[day].append(entry)
+
         daily_data = []
-        
-        # "daily" est une liste de 7 objets, un par jour
-        # On parcourt les 7 jours de prévisions
-        for day_idx, day in enumerate(data.get("daily", [])):
-            
-            # Extraction des données météo pour ce jour
-            # day["temp"]["day"] = température en journée
-            # day.get("rain", 0) = volume de pluie (0 si pas de pluie)
-            # day["pop"] = probabilité de précipitations (0 à 1)
-            
+        for day_idx, (day, entries) in enumerate(sorted(by_day.items())[:5]):
+            temps = [e["main"]["temp"] for e in entries]
+            humidities = [e["main"]["humidity"] for e in entries]
+            pops = [e.get("pop", 0) for e in entries]
+            rain_vols = [e.get("rain", {}).get("3h", 0) for e in entries]
+
             daily_data.append({
                 "city_name": city_name,
+                "date": day,
                 "day_index": day_idx,
-                "date": datetime.fromtimestamp(day["dt"]).strftime("%Y-%m-%d"),
-                "day_temperature": day["temp"]["day"],     # Temp en journée (°C)
-                "night_temperature": day["temp"]["night"], # Temp la nuit (°C)
-                "min_temperature": day["temp"]["min"],
-                "max_temperature": day["temp"]["max"],
-                "humidity": day["humidity"],               # Humidité en %
-                "wind_speed": day["wind_speed"],           # Vent en m/s
-                "precipitation_prob": day.get("pop", 0),  # Probabilité pluie (0-1)
-                "rain_volume": day.get("rain", 0),         # Volume pluie en mm
-                "weather_description": day["weather"][0]["description"],
-                "uvi": day.get("uvi", 0),                  # Indice UV
+                "day_temperature": sum(temps) / len(temps),
+                "humidity": sum(humidities) / len(humidities),
+                "precipitation_prob": sum(pops) / len(pops),
+                "rain_volume": sum(rain_vols),
+                "wind_speed": sum(e["wind"]["speed"] for e in entries) / len(entries),
             })
-        
+
         return daily_data
-        
+
     except requests.exceptions.RequestException as e:
-        print(f"   ❌ Erreur météo pour {city_name}: {e}")
+        print(f"    Erreur météo pour {city_name}: {e}")
         return []
 
 
 # Récupération de la météo pour toutes les villes
-print("\n🌤️ Récupération des données météo (7 jours)...")
+print("\n Récupération des données météo (7 jours)...")
 all_weather_data = []
 
 for _, row in df_cities.iterrows():
     weather = get_weather(row["latitude"], row["longitude"], row["city_name"])
     all_weather_data.extend(weather)
-    print(f"   ✅ Météo récupérée pour {row['city_name']}")
-    time.sleep(1)  # Respect du rate limit API
+    if weather:
+        print(f"    Météo récupérée pour {row['city_name']}")
 
 # Création du DataFrame météo
 df_weather = pd.DataFrame(all_weather_data)
-print(f"\n✅ {len(df_weather)} entrées météo créées ({len(CITIES)} villes × 7 jours)")
+print(f"\n {len(df_weather)} entrées météo créées ({len(CITIES)} villes × 7 jours)")
 print(df_weather.head(10))
 
 
@@ -311,7 +299,7 @@ df_weather["weather_score"] = df_weather.apply(
 # row["day_temperature"] → accès à une valeur dans la ligne
 # axis=1 → on parcourt les lignes (axis=0 parcourrait les colonnes)
 
-print("\n📊 Scores météo calculés :")
+print("\n Scores météo calculés :")
 print(df_weather[["city_name", "date", "day_temperature", "rain_volume", 
                    "precipitation_prob", "weather_score"]].head(14))
 
@@ -360,7 +348,7 @@ print(top5_cities[["rank", "city_name", "avg_weather_score", "avg_temperature", 
 
 df_final_weather = pd.merge(df_cities, df_city_score, on="city_name", how="inner")
 
-print("\n✅ DataFrame final (météo + coordonnées) :")
+print("\n DataFrame final (météo + coordonnées) :")
 print(df_final_weather.head())
 
 # Sauvegarde en CSV
@@ -368,7 +356,7 @@ print(df_final_weather.head())
 df_final_weather.to_csv("weather_france_cities.csv", index=False, encoding="utf-8")
 df_weather.to_csv("weather_daily_details.csv", index=False, encoding="utf-8")
 
-print("\n✅ Fichiers CSV sauvegardés :")
+print("\n Fichiers CSV sauvegardés :")
 print("   - weather_france_cities.csv (scores par ville)")
 print("   - weather_daily_details.csv (détails 7 jours)")
 
@@ -401,7 +389,7 @@ fig_weather = px.scatter_mapbox(
     zoom=4.5,                               # Niveau de zoom sur la carte
     center={"lat": 46.5, "lon": 2.5},      # Centre de la carte (France)
     mapbox_style="carto-positron",          # Style de fond de carte
-    title="🌤️ Score Météo des 35 Villes Françaises (7 prochains jours)",
+    title=" Score Météo des 35 Villes Françaises (7 prochains jours)",
     labels={
         "avg_weather_score": "Score Météo",
         "avg_temperature": "Température moy. (°C)",
@@ -427,7 +415,7 @@ fig_weather.show()
 # Map 2 : Top 5 destinations mis en évidence
 df_top5_map = df_final_weather.copy()
 df_top5_map["is_top5"] = df_top5_map["rank"].apply(
-    lambda x: "⭐ Top 5" if x <= 5 else "Autres villes"
+    lambda x: " Top 5" if x <= 5 else "Autres villes"
 )
 
 fig_top5 = px.scatter_mapbox(
@@ -438,7 +426,7 @@ fig_top5 = px.scatter_mapbox(
     color="is_top5",
     hover_name="city_name",
     hover_data={"avg_weather_score": ":.1f", "rank": True, "avg_temperature": ":.1f"},
-    color_discrete_map={"⭐ Top 5": "#FF6B35", "Autres villes": "#A0A0A0"},
+    color_discrete_map={" Top 5": "#FF6B35", "Autres villes": "#A0A0A0"},
     size_max=50,
     zoom=4.5,
     center={"lat": 46.5, "lon": 2.5},
@@ -449,7 +437,7 @@ fig_top5 = px.scatter_mapbox(
 fig_top5.update_layout(height=600)
 fig_top5.show()
 
-print("\n🗺️ Cartes générées avec succès !")
-print(f"\n📋 TOP 5 FINAL :")
+print("\n Cartes générées avec succès !")
+print(f"\n TOP 5 FINAL :")
 for _, row in top5_cities.iterrows():
     print(f"   #{int(row['rank'])} {row['city_name']} — Score: {row['avg_weather_score']:.1f}/100 | {row['avg_temperature']:.1f}°C | {row['total_rain']:.1f}mm de pluie")

@@ -176,6 +176,7 @@ def scrape_city_hotels(city_name, max_pages=3):
             # Évite que le script reste bloqué si le serveur ne répond pas
             
             response.raise_for_status()
+            open("debug_page.html", "w").write(response.text)
             
             hotels = scrape_hotels_from_page(response.text, city_name)
             all_hotels.extend(hotels)
