@@ -19,10 +19,6 @@ import io             # Pour écrire des fichiers en mémoire (sans passer par l
 # ║           CONFIGURATION AWS                             ║
 # ╚══════════════════════════════════════════════════════════╝
 
-# ⚠️ SÉCURITÉ : En production, ne JAMAIS mettre les credentials dans le code.
-# Utiliser des variables d'environnement ou AWS IAM Roles.
-# Pour ce projet de cours, on les met ici pour la lisibilité.
-
 AWS_CONFIG = {
     "aws_access_key_id": "VOTRE_ACCESS_KEY",
     "aws_secret_access_key": "VOTRE_SECRET_KEY",
@@ -94,7 +90,7 @@ def upload_to_s3(df, bucket_name, s3_key, aws_config):
         ContentType="text/csv"        # Type MIME du fichier
     )
     
-    print(f"   ✅ Uploadé vers s3://{bucket_name}/{s3_key}")
+    print(f"    Uploadé vers s3://{bucket_name}/{s3_key}")
 
 
 def create_s3_bucket(bucket_name, aws_config):
@@ -117,19 +113,19 @@ def create_s3_bucket(bucket_name, aws_config):
                 "LocationConstraint": aws_config["region_name"]
             }
         )
-        print(f"✅ Bucket créé : s3://{bucket_name}")
+        print(f" Bucket créé : s3://{bucket_name}")
         
     except s3_client.exceptions.BucketAlreadyOwnedByYou:
         # Le bucket existe déjà et vous en êtes le propriétaire → pas de problème
-        print(f"ℹ️ Bucket existe déjà : s3://{bucket_name}")
+        print(f" Bucket existe déjà : s3://{bucket_name}")
         
     except Exception as e:
-        print(f"❌ Erreur création bucket : {e}")
+        print(f" Erreur création bucket : {e}")
 
 
 # ----- EXÉCUTION : Upload des données vers S3 -----
 
-print("☁️ Chargement des données vers S3...")
+print(" Chargement des données vers S3...")
 
 # Chargement des CSV créés dans les parties précédentes
 df_weather = pd.read_csv("weather_france_cities.csv")
@@ -154,7 +150,7 @@ upload_to_s3(df_hotels, S3_BUCKET_NAME, "raw/hotels/hotels.csv", AWS_CONFIG)
 # - Transform : nettoyer, enrichir, restructurer
 # - Load : charger vers le Data Warehouse (AWS RDS)
 
-print("\n🔄 Étape ETL — Transform...")
+print("\n Étape ETL — Transform...")
 
 # ----- EXTRACT : Lecture depuis S3 -----
 
@@ -186,7 +182,7 @@ def read_csv_from_s3(bucket_name, s3_key, aws_config):
 df_weather_raw = read_csv_from_s3(S3_BUCKET_NAME, "raw/weather/cities_weather.csv", AWS_CONFIG)
 df_hotels_raw = read_csv_from_s3(S3_BUCKET_NAME, "raw/hotels/hotels.csv", AWS_CONFIG)
 
-print("   ✅ Données extraites depuis S3")
+print("    Données extraites depuis S3")
 
 
 # ----- TRANSFORM : Nettoyage et enrichissement -----
@@ -252,9 +248,9 @@ df_hotels_final = df_hotels_clean[[
     "booking_url", "score", "price_eur", "description"
 ]].copy()
 
-print(f"   ✅ {len(df_cities_clean)} villes nettoyées")
-print(f"   ✅ {len(df_weather_clean)} entrées météo nettoyées")
-print(f"   ✅ {len(df_hotels_final)} hôtels nettoyés")
+print(f"    {len(df_cities_clean)} villes nettoyées")
+print(f"    {len(df_weather_clean)} entrées météo nettoyées")
+print(f"    {len(df_hotels_final)} hôtels nettoyés")
 
 # Upload des données transformées dans la zone "processed"
 upload_to_s3(df_cities_clean, S3_BUCKET_NAME, "processed/cities.csv", AWS_CONFIG)
@@ -274,7 +270,7 @@ upload_to_s3(df_hotels_final, S3_BUCKET_NAME, "processed/hotels.csv", AWS_CONFIG
 # Il permet d'interagir avec des BDD SQL en Python.
 # create_engine() crée une connexion réutilisable.
 
-print("\n🗄️ Connexion à AWS RDS (PostgreSQL)...")
+print("\n Connexion à AWS RDS (PostgreSQL)...")
 
 # Construction de l'URL de connexion PostgreSQL
 # Format : postgresql://user:password@host:port/database
@@ -345,7 +341,7 @@ def create_tables(engine):
         # Commit : valide les transactions en attente
         conn.commit()
     
-    print("   ✅ Tables créées dans AWS RDS")
+    print("    Tables créées dans AWS RDS")
 
 
 def load_dataframe_to_rds(df, table_name, engine):
@@ -355,7 +351,7 @@ def load_dataframe_to_rds(df, table_name, engine):
     Explication jury :
     - df.to_sql() est la méthode pandas pour écrire dans une BDD SQL
     - if_exists="append" → ajoute les données (ne recrée pas la table)
-    - if_exists="replace" → recrée la table (⚠️ supprime les données existantes)
+    - if_exists="replace" → recrée la table ( supprime les données existantes)
     - index=False → ne pas écrire l'index pandas comme colonne
     - chunksize=1000 → insère par lots de 1000 lignes (plus performant)
     """
@@ -368,14 +364,14 @@ def load_dataframe_to_rds(df, table_name, engine):
         chunksize=1000
     )
     
-    print(f"   ✅ {len(df)} lignes chargées dans la table '{table_name}'")
+    print(f"    {len(df)} lignes chargées dans la table '{table_name}'")
 
 
 # ----- EXÉCUTION : Création des tables et chargement -----
 
 create_tables(engine)
 
-print("\n📤 Chargement des données dans AWS RDS...")
+print("\n Chargement des données dans AWS RDS...")
 load_dataframe_to_rds(df_cities_clean, "cities", engine)
 load_dataframe_to_rds(df_weather_clean, "weather", engine)
 load_dataframe_to_rds(df_hotels_final, "hotels", engine)
@@ -388,7 +384,7 @@ load_dataframe_to_rds(df_hotels_final, "hotels", engine)
 # On vérifie que les données sont bien dans la BDD
 # en exécutant des requêtes SQL de vérification
 
-print("\n🔍 Vérification des données dans AWS RDS...")
+print("\n Vérification des données dans AWS RDS...")
 
 with engine.connect() as conn:
     
@@ -404,7 +400,7 @@ with engine.connect() as conn:
     
     # pd.read_sql() exécute une requête SQL et retourne un DataFrame pandas
     df_top5_check = pd.read_sql(top5_query, conn)
-    print("\n🏆 TOP 5 DESTINATIONS (depuis RDS) :")
+    print("\n TOP 5 DESTINATIONS (depuis RDS) :")
     print(df_top5_check.to_string(index=False))
     
     # Requête 2 : Top 20 hôtels
@@ -417,7 +413,7 @@ with engine.connect() as conn:
     """)
     
     df_top20_check = pd.read_sql(top20_query, conn)
-    print("\n🏨 TOP 20 HÔTELS (depuis RDS) :")
+    print("\n TOP 20 HÔTELS (depuis RDS) :")
     print(df_top20_check.to_string(index=False))
     
     # Requête 3 : Stats globales
@@ -429,9 +425,9 @@ with engine.connect() as conn:
     """)
     
     df_stats = pd.read_sql(stats_query, conn)
-    print(f"\n📊 STATS BDD : {df_stats.to_dict('records')[0]}")
+    print(f"\n STATS BDD : {df_stats.to_dict('records')[0]}")
 
 
-print("\n✅ ETL complet ! Data Lake S3 + Data Warehouse RDS opérationnels.")
+print("\n ETL complet ! Data Lake S3 + Data Warehouse RDS opérationnels.")
 print(f"   → S3 : s3://{S3_BUCKET_NAME}/")
 print(f"   → RDS : {RDS_CONFIG['host']}/{RDS_CONFIG['database']}")
