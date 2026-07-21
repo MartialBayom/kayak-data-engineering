@@ -328,12 +328,12 @@ df_city_score["total_rain"] = df_city_score["total_rain"].round(1)
 df_city_score = df_city_score.sort_values("avg_weather_score", ascending=False)
 df_city_score["rank"] = range(1, len(df_city_score) + 1)
 
-print("\n🏆 CLASSEMENT DES VILLES PAR SCORE MÉTÉO :")
+print("\n CLASSEMENT DES VILLES PAR SCORE MÉTÉO :")
 print(df_city_score.to_string(index=False))
 
 # Top 5 destinations
 top5_cities = df_city_score.head(5)
-print("\n⭐ TOP 5 MEILLEURES DESTINATIONS :")
+print("\n TOP 5 MEILLEURES DESTINATIONS :")
 print(top5_cities[["rank", "city_name", "avg_weather_score", "avg_temperature", "total_rain"]].to_string(index=False))
 
 
@@ -431,7 +431,7 @@ fig_top5 = px.scatter_mapbox(
     zoom=4.5,
     center={"lat": 46.5, "lon": 2.5},
     mapbox_style="carto-positron",
-    title="🏆 Top 5 Meilleures Destinations Météo en France"
+    title=" Top 5 Meilleures Destinations Météo en France"
 )
 
 fig_top5.update_layout(height=600)
