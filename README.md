@@ -1,8 +1,6 @@
 # Kayak - Recommandation de Destinations Françaises
 
-> *Pipeline Data Engineering complet : API Météo → Scraping Booking.com → AWS S3 → AWS RDS*
-
-[![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python)](https://www.python.org/)
+> *Pipeline Data Engineering complet : API Meteo, API Hotels (Google Places), AWS S3, AWS RDS*[![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python)](https://www.python.org/)
 [![AWS S3](https://img.shields.io/badge/AWS-S3-FF9900?logo=amazonaws)](https://aws.amazon.com/s3/)
 [![AWS RDS](https://img.shields.io/badge/AWS-RDS-FF9900?logo=amazonaws)](https://aws.amazon.com/rds/)
 [![Plotly](https://img.shields.io/badge/Plotly-Maps-3F4F75?logo=plotly)](https://plotly.com/)
@@ -56,15 +54,14 @@ kayak/
 ├── data/
 │   ├── weather_france_cities.csv     # Scores météo des 35 villes
 │   ├── weather_daily_details.csv     # Météo journalière (35 × 7 jours)
-│   ├── hotels.csv                    # Hôtels scrapés Booking.com
-│   ├── final_kayak_data.csv          # Dataset consolidé final
+│   ├── hotels.csv                    # Hotels via Google Places API (699 hotels)│   ├── final_kayak_data.csv          # Dataset consolidé final
 │   └── kayak_destinations.csv        # Top destinations avec coordonnées
 ├── notebooks/
 │   └── kayak_final.ipynb             # Notebook consolidé : météo, hôtels, géocodage, ETL, cartes
 ├── src/
 │   ├── kayak_part1_weather.py        # Collecte météo (Nominatim + OpenWeatherMap)
-│   ├── kayak_part2_scraping.py       # Scraping hôtels (BeautifulSoup)
-│   └── kayak_part3_etl.py            # ETL S3 → RDS PostgreSQL
+│   ├── kayak_part2_scraping.py       # Tentative scraping Booking.com (bloque par anti-bot, non utilise)
+│   ├── kayak_part2_hotels_googleplaces.py  # Collecte hotels via Google Places API (methode retenue)│   └── kayak_part3_etl.py            # ETL S3 → RDS PostgreSQL
 ├── .env.example
 ├── .gitignore
 ├── README.md
